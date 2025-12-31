@@ -40,9 +40,9 @@ jobs:
         working-directory: ./examples
         run: npm ci
       
-      - name: Build example
+      - name: Build example for GitHub Pages
         working-directory: ./examples
-        run: npm run build
+        run: npm run build:gh-pages
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
