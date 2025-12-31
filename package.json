@@ -71,7 +71,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "jsdom": "^27.4.0",
+    "happy-dom": "^20.0.11",
     "prettier": "^3.2.5",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
