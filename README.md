@@ -9,8 +9,6 @@
 
 🎮 **[Live Demo](https://christiandimitri.github.io/r3f-peridot/)** | 📦 **[npm Package](https://www.npmjs.com/package/r3f-peridot)** | 📚 **[Examples](https://github.com/christiandimitri/r3f-peridot/tree/main/examples)**
 
-![Peridot Demo](https://via.placeholder.com/800x400?text=Peridot+Demo)
-
 <img width="1718" height="857" alt="image" src="https://github.com/user-attachments/assets/be438dd2-e3aa-4028-9bdb-71e7c0c55ed9" />
 
 ## ✨ Why Peridot?
