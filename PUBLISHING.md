@@ -1,6 +1,6 @@
 # Publishing Guide for r3f-peridot
 
-This guide walks you through the process of publishing your npm package to npm registry.
+This guide walks you through the process of publishing your npm package to both npm registry and GitHub Packages.
 
 ## Prerequisites
 
@@ -226,6 +226,107 @@ Update the version number:
 npm version patch
 ```
 
+## Automated Publishing with GitHub Actions (Recommended)
+
+The repository includes a GitHub Actions workflow that automatically publishes to **both** npm and GitHub Packages when you create a release.
+
+### Setup
+
+#### 1. Add npm Token to GitHub Secrets
+
+1. Generate an npm automation token:
+   - Go to [npmjs.com/settings/tokens](https://www.npmjs.com/settings/tokens)
+   - Click **"Generate New Token"** → **"Automation"**
+   - Copy the token
+
+2. Add it to GitHub repository secrets:
+   - Go to your GitHub repository
+   - **Settings** → **Secrets and variables** → **Actions**
+   - Click **"New repository secret"**
+   - Name: `NPM_TOKEN`
+   - Value: *paste your npm token*
+   - Click **"Add secret"**
+
+#### 2. Enable GitHub Packages (Automatic)
+
+GitHub Packages publishing uses `GITHUB_TOKEN` which is automatically available. No setup needed!
+
+### How to Publish
+
+1. **Update version** (if needed):
+   ```bash
+   npm version patch  # or minor, major
+   git push
+   git push --tags
+   ```
+
+2. **Create a GitHub Release**:
+   - Go to your GitHub repository
+   - Click **"Releases"** → **"Create a new release"**
+   - Choose a tag (or create new one like `v0.1.1`)
+   - Add release notes
+   - Click **"Publish release"**
+
+3. **Watch the magic happen**:
+   - GitHub Actions automatically:
+     - Runs tests
+     - Builds the package
+     - Publishes to npm as `r3f-peridot`
+     - Publishes to GitHub Packages as `@christiandimitri/r3f-peridot`
+
+### Installation from Different Registries
+
+Users can install from either registry:
+
+**From npm (recommended):**
+```bash
+npm install r3f-peridot
+```
+
+**From GitHub Packages:**
+```bash
+# Add .npmrc file with:
+@christiandimitri:registry=https://npm.pkg.github.com
+
+# Then install:
+npm install @christiandimitri/r3f-peridot
+```
+
+## Manual Publishing to GitHub Packages
+
+If you need to manually publish to GitHub Packages:
+
+1. **Create a GitHub Personal Access Token**:
+   - Go to [github.com/settings/tokens](https://github.com/settings/tokens)
+   - **Generate new token (classic)**
+   - Select scopes: `write:packages`, `read:packages`
+   - Copy the token
+
+2. **Login to GitHub Packages**:
+   ```bash
+   npm login --scope=@christiandimitri --auth-type=legacy --registry=https://npm.pkg.github.com
+   ```
+   - Username: `christiandimitri`
+   - Password: *paste your GitHub token*
+   - Email: *your GitHub email*
+
+3. **Temporarily update package.json**:
+   ```json
+   {
+     "name": "@christiandimitri/r3f-peridot",
+     "publishConfig": {
+       "registry": "https://npm.pkg.github.com"
+     }
+   }
+   ```
+
+4. **Publish**:
+   ```bash
+   npm publish
+   ```
+
+5. **Revert package.json changes** to keep npm compatibility.
+
 ## Unpublishing (Use with Caution)
 
 You can unpublish within 72 hours:
@@ -241,6 +342,8 @@ npm deprecate r3f-peridot@0.1.0 "This version has a critical bug, please upgrade
 ## Resources
 
 - [npm Documentation](https://docs.npmjs.com/)
+- [GitHub Packages Documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)
+- [GitHub Actions for Publishing](https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages)
 - [Semantic Versioning](https://semver.org/)
 - [npm Publishing Guide](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry)
 - [Creating npm Packages](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages)

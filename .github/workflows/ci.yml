@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: npm run build
 
-  publish:
+  publish-npm:
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
@@ -64,4 +64,37 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  
+  publish-github:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@christiandimitri'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Update package name for GitHub Packages
+        run: |
+          node -e "const pkg = require('./package.json'); pkg.name = '@christiandimitri/r3f-peridot'; require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));"
+      
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
