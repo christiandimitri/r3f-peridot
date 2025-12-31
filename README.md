@@ -7,6 +7,8 @@
 
 **Peridot** brings professional-grade outline rendering to React Three Fiber. Perfect for architectural visualization, BIM workflows, CAD applications, and any 3D model that needs crisp, clean edges.
 
+🎮 **[Live Demo](https://christiandimitri.github.io/r3f-peridot/)** | 📦 **[npm Package](https://www.npmjs.com/package/r3f-peridot)** | 📚 **[Examples](https://github.com/christiandimitri/r3f-peridot/tree/main/examples)**
+
 ![Peridot Demo](https://via.placeholder.com/800x400?text=Peridot+Demo)
 
 <img width="1718" height="857" alt="image" src="https://github.com/user-attachments/assets/be438dd2-e3aa-4028-9bdb-71e7c0c55ed9" />
@@ -278,20 +280,26 @@ import { CustomOutlinePass } from 'r3f-peridot'
 
 ## 🎯 Examples
 
-Check out the `/examples` directory for complete working examples:
+### 🌐 [Live Demo](https://christiandimitri.github.io/r3f-peridot/)
 
-- **Basic Example** - Simple scene with primitive geometry
-- **GLTF Models** - Loading and outlining GLTF/GLB files
+Try out the interactive demo with:
+- **Primitive Shapes** - Cubes, spheres, and custom geometry
+- **GLTF Models** - Load and outline GLTF/GLB files
 - **IFC Models** - Working with Building Information Models
-- **Interactive Controls** - Real-time parameter adjustment
+- **Fragment Models** - Optimized `.frag` file support
+- **Real-time Controls** - Adjust all outline parameters live
 
-To run examples locally:
+### 💻 Run Examples Locally
+
+Check out the `/examples` directory for the complete source code:
 
 ```bash
 cd examples
 npm install
 npm run dev
 ```
+
+Open http://localhost:3000 to see the demo locally.
 
 ## 🎓 How It Works
 
@@ -335,9 +343,11 @@ MIT © Christian Dimitri
 
 ## 📚 Resources
 
-- [Documentation](https://github.com/yourusername/r3f-peridot#readme)
-- [Examples](https://github.com/yourusername/r3f-peridot/tree/main/examples)
-- [Issues](https://github.com/yourusername/r3f-peridot/issues)
+- [Live Demo](https://christiandimitri.github.io/r3f-peridot/)
+- [Documentation](https://github.com/christiandimitri/r3f-peridot#readme)
+- [npm Package](https://www.npmjs.com/package/r3f-peridot)
+- [Examples Source Code](https://github.com/christiandimitri/r3f-peridot/tree/main/examples)
+- [Issues](https://github.com/christiandimitri/r3f-peridot/issues)
 - [WebGL Outlines Blog Post](https://omar-shehata.medium.com/how-to-render-outlines-in-webgl-8253c14724f9)
 
 ## 🌟 Show Your Support
