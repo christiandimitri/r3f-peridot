@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2025-12-31
+
+### Fixed
+- Fixed multiple Three.js instances warning by improving Vite bundling configuration
+- Fixed WASM file path resolution for IFC loading in examples
+- Fixed GitHub Pages deployment with correct base path configuration
+- Fixed worker.mjs path resolution for fragment file loading
+- Added proper TypeScript definitions for Vite environment variables
+
+### Changed
+- Improved build configuration for better dependency deduplication
+- Updated examples to use dynamic base paths for better deployment compatibility
+
+## [0.1.1] - 2025-01-01
+
+### Fixed
+- Initial bug fixes and improvements
+
 ## [0.1.0] - 2025-01-01
 
 ### Added
