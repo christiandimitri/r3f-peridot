@@ -1,7 +1,7 @@
 {
   "name": "r3f-peridot",
   "version": "0.1.0",
-  "description": "High-quality outline effects for React Three Fiber - supports GLTF, IFC, and any 3D model using post-processing shaders",
+  "description": "High-quality outline effects for React Three Fiber - supports GLTF, IFC (via @thatopen/fragments & IFC.js), and any 3D model using post-processing shaders",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -43,7 +43,11 @@
     "postprocessing",
     "edge-detection",
     "3d",
-    "webgl"
+    "webgl",
+    "thatopen",
+    "fragments",
+    "web-ifc",
+    "ifcjs"
   ],
   "author": "Christian Dimitri",
   "license": "MIT",

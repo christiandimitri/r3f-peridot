@@ -11,7 +11,7 @@
 
 ## ✨ Why Peridot?
 
-- 🏗️ **IFC Support** - First-class support for Building Information Modeling (BIM/IFC) files
+- 🏗️ **IFC Support** - First-class support for Building Information Modeling (BIM/IFC) files via [@thatopen/fragments](https://github.com/ThatOpen/engine_fragment) and [IFC.js](https://ifcjs.github.io/info/)
 - 📦 **GLTF Ready** - Works seamlessly with GLTF/GLB models
 - 🎨 **High-Quality** - Uses advanced depth, normal, and surface ID detection
 - ⚡ **Performant** - Efficient post-processing shader implementation
@@ -81,19 +81,36 @@ function App() {
 ### With IFC Models 🏗️
 
 ```tsx
-import { IFCLoader } from 'web-ifc-three/IFCLoader'
+import { FragmentsManager } from '@thatopen/fragments'
 import { OutlineEffect } from 'r3f-peridot'
-import { useEffect, useState } from 'react'
+import { useThree } from '@react-three/fiber'
+import { useEffect, useRef } from 'react'
 
 function IFCModel({ url }) {
-  const [model, setModel] = useState(null)
+  const fragmentsRef = useRef(null)
+  const { scene } = useThree()
 
   useEffect(() => {
-    const loader = new IFCLoader()
-    loader.load(url, setModel)
-  }, [url])
+    if (!url) return
 
-  return model ? <primitive object={model} /> : null
+    const fragments = new FragmentsManager()
+    fragmentsRef.current = fragments
+
+    fetch(url)
+      .then(res => res.arrayBuffer())
+      .then(data => {
+        fragments.load(new Uint8Array(data))
+        scene.add(fragments.object)
+        fragments.update(true)
+      })
+
+    return () => {
+      scene.remove(fragments.object)
+      fragments.dispose()
+    }
+  }, [url, scene])
+
+  return null
 }
 
 function App() {
@@ -108,6 +125,8 @@ function App() {
   )
 }
 ```
+
+> **Note**: This example uses [@thatopen/fragments](https://github.com/ThatOpen/engine_fragment) for optimized IFC loading. For raw IFC files, you can use [web-ifc-three](https://github.com/IFCjs/web-ifc-three) with `IFCLoader`.
 
 ## 📖 API Reference
 
@@ -309,7 +328,8 @@ MIT © Christian Dimitri
 - [Omar Shehata](https://github.com/OmarShehata) for the original [webgl-outlines](https://github.com/OmarShehata/webgl-outlines) technique
 - [Three.js](https://threejs.org/) for the amazing 3D library
 - [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) for the React renderer
-- [IFC.js](https://ifcjs.github.io/info/) for IFC support
+- [That Open Company](https://thatopen.com/) for [@thatopen/fragments](https://github.com/ThatOpen/engine_fragment) - Optimized IFC/BIM rendering
+- [IFC.js](https://ifcjs.github.io/info/) and [web-ifc](https://github.com/tomvandig/web-ifc) for IFC parsing and support
 
 ## 📚 Resources
 
