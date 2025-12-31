@@ -9,6 +9,8 @@
 
 ![Peridot Demo](https://via.placeholder.com/800x400?text=Peridot+Demo)
 
+<img width="1718" height="857" alt="image" src="https://github.com/user-attachments/assets/be438dd2-e3aa-4028-9bdb-71e7c0c55ed9" />
+
 ## ✨ Why Peridot?
 
 - 🏗️ **IFC Support** - First-class support for Building Information Modeling (BIM/IFC) files via [@thatopen/fragments](https://github.com/ThatOpen/engine_fragment) and [IFC.js](https://ifcjs.github.io/info/)
