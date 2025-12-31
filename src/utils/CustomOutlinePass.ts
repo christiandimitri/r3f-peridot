@@ -26,7 +26,7 @@ export class CustomOutlinePass extends Pass {
     this.renderCamera = camera
     this.resolution = new THREE.Vector2(resolution.x, resolution.y)
 
-    this.fsQuad = new FullScreenQuad(null as any)
+    this.fsQuad = new FullScreenQuad(undefined)
     this.fsQuad.material = this.createOutlinePostProcessMaterial()
 
     // Create a buffer to store the normals of the scene onto
