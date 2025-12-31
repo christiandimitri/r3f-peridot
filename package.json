@@ -1,0 +1,81 @@
+{
+  "name": "r3f-peridot",
+  "version": "0.1.0",
+  "description": "High-quality outline effects for React Three Fiber - supports GLTF, IFC, and any 3D model using post-processing shaders",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "react",
+    "three",
+    "threejs",
+    "react-three-fiber",
+    "r3f",
+    "gltf",
+    "ifc",
+    "bim",
+    "cad",
+    "architecture",
+    "outline",
+    "shader",
+    "postprocessing",
+    "edge-detection",
+    "3d",
+    "webgl"
+  ],
+  "author": "Christian Dimitri",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christiandimitri/r3f-peridot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/christiandimitri/r3f-peridot/issues"
+  },
+  "homepage": "https://github.com/christiandimitri/r3f-peridot#readme",
+  "peerDependencies": {
+    "@react-three/fiber": ">=8.0.0",
+    "react": ">=18.0.0",
+    "three": ">=0.160.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.55",
+    "@types/three": "^0.175.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.0",
+    "vitest": "^1.2.2"
+  }
+}
+
