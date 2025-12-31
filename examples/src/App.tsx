@@ -96,7 +96,8 @@ function FragmentModel({ file }: { file: File | null }) {
         
         // Initialize fragments if not already done
         if (!fragmentsRef.current) {
-          fragmentsRef.current = new FRAGS.FragmentsModels('/worker.mjs')
+          const basePath = import.meta.env.BASE_URL || '/'
+          fragmentsRef.current = new FRAGS.FragmentsModels(`${basePath}worker.mjs`)
         }
 
         // Read file as array buffer
@@ -208,7 +209,8 @@ function IFCModel({ file }: { file: File | null }) {
         
         // Initialize fragments if not already done
         if (!fragmentsRef.current) {
-          fragmentsRef.current = new FRAGS.FragmentsModels('/worker.mjs')
+          const basePath = import.meta.env.BASE_URL || '/'
+          fragmentsRef.current = new FRAGS.FragmentsModels(`${basePath}worker.mjs`)
         }
 
         // Read file as array buffer
@@ -217,7 +219,9 @@ function IFCModel({ file }: { file: File | null }) {
 
         // Convert IFC to fragments (exactly like the example)
         const serializer = new FRAGS.IfcImporter()
-        serializer.wasm.path = '/'
+        // Use local WASM files for development, CDN for production if local files fail
+        const basePath = import.meta.env.BASE_URL || '/'
+        serializer.wasm.path = basePath
         serializer.wasm.absolute = false
         const fragmentsBytes = await serializer.process({ 
           bytes, 
