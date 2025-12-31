@@ -4,6 +4,7 @@ import { OrbitControls, useGLTF, Environment } from '@react-three/drei'
 import { OutlineEffect } from 'r3f-peridot'
 import type { OutlineEffectRef } from 'r3f-peridot'
 import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import * as FRAGS from '@thatopen/fragments'
 
 // GLTF Model component
@@ -16,10 +17,12 @@ function GLTFModel({ url }: { url: string | null }) {
 
     const loadGLTF = async () => {
       try {
-        const { scene } = await useGLTF.preload(url)
+        const loader = new GLTFLoader()
+        const gltf = await loader.loadAsync(url)
+        const scene = gltf.scene
         
         // Make all materials double-sided
-        scene.traverse((child) => {
+        scene.traverse((child: THREE.Object3D) => {
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh
             if (mesh.material) {
@@ -55,7 +58,8 @@ function GLTFModel({ url }: { url: string | null }) {
 
 // Fragment Model component - loads pre-converted .frag files
 function FragmentModel({ file }: { file: File | null }) {
-  const { camera, scene, controls } = useThree()
+  const { camera, controls } = useThree()
+  const scene = useThree((state) => state.scene)
   const [model, setModel] = useState<FRAGS.FragmentsModel | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const fragmentsRef = useRef<FRAGS.FragmentsModels | null>(null)
@@ -72,12 +76,13 @@ function FragmentModel({ file }: { file: File | null }) {
       fragmentsRef.current?.update(true)
     }
 
-    controls.addEventListener('change', handleControlChange)
-    controls.addEventListener('rest', handleControlRest)
+    const orbitControls = controls as any
+    orbitControls.addEventListener('change', handleControlChange)
+    orbitControls.addEventListener('rest', handleControlRest)
 
     return () => {
-      controls.removeEventListener('change', handleControlChange)
-      controls.removeEventListener('rest', handleControlRest)
+      orbitControls.removeEventListener('change', handleControlChange)
+      orbitControls.removeEventListener('rest', handleControlRest)
     }
   }, [controls, fragmentsRef.current])
 
@@ -165,7 +170,8 @@ function FragmentModel({ file }: { file: File | null }) {
 
 // IFC Model component using @thatopen/fragments
 function IFCModel({ file }: { file: File | null }) {
-  const { camera, scene, controls } = useThree()
+  const { camera, controls } = useThree()
+  const scene = useThree((state) => state.scene)
   const [model, setModel] = useState<FRAGS.FragmentsModel | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const fragmentsRef = useRef<FRAGS.FragmentsModels | null>(null)
@@ -182,12 +188,13 @@ function IFCModel({ file }: { file: File | null }) {
       fragmentsRef.current?.update(true)
     }
 
-    controls.addEventListener('change', handleControlChange)
-    controls.addEventListener('rest', handleControlRest)
+    const orbitControls = controls as any
+    orbitControls.addEventListener('change', handleControlChange)
+    orbitControls.addEventListener('rest', handleControlRest)
 
     return () => {
-      controls.removeEventListener('change', handleControlChange)
-      controls.removeEventListener('rest', handleControlRest)
+      orbitControls.removeEventListener('change', handleControlChange)
+      orbitControls.removeEventListener('rest', handleControlRest)
     }
   }, [controls, fragmentsRef.current])
 
